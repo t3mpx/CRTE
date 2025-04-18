@@ -1,7 +1,9 @@
 # Methodology
 >1. Dump the trust key of the child domain.
->2. Forge an inter-forest ticket.
->3. Inject the ticket. 
+>2. Check if SID Filtering is enabled.
+>3. Enumerate RID > 1000.
+>4. Forge an inter-forest ticke.
+>5. Inject the ticket. 
 
 ---
 # Powershell
