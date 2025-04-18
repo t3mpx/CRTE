@@ -1,5 +1,7 @@
 # Methodology
->1. 
+>1. Dump the trust key of the child domain.
+>2. Forge an inter-forest ticket.
+>3. Inject the ticket. 
 
 ---
 # Powershell
