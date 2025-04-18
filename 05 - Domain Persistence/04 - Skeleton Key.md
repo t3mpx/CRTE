@@ -1,5 +1,6 @@
 > ⚠️ **WARNING:**
 > NEVER USE ON PRODUCTION!
+> 
 > Resets on domain controller reboot.
 
 # Methodology

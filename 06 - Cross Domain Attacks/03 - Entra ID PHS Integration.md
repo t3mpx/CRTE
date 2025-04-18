@@ -18,6 +18,7 @@ Get-DomainUser -Identity "MSOL_*" -Domain contoso.local
 ```
 
 **Retrieve the password:**
+
 https://gist.github.com/xpn/0dc393e944d8733e3c63023968583545#file-azuread_decrypt_msol-ps1
 ```powershell
 .\azuread_decrypt_msol.ps1
