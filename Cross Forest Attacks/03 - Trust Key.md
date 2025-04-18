@@ -23,7 +23,7 @@
 Get-ADTrust -Filter *
 ```
 
-**Look for groups with RID higher than 1000:**
+**Look for groups with RID higher than 1000 in the target machine:**
 ```powershell
 Get-ADGroup -Filter 'SID -ge "S-1-5-21-4066061358-3942393892-617142613-1000"' -Server euvendor.local
 ```
