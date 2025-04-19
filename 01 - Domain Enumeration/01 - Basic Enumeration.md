@@ -285,6 +285,9 @@ Get-PathAcl -Path "\\us-dc\sysvol"
 
 # Get Interesting Domain ACLs of User
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "<User>"}
+
+# Get ACLs of speficin domain:
+Find-InterestingDomainAcl -Domain <Domain>
 ```
 
 ### Domain Trust Enumeration
@@ -347,4 +350,13 @@ Get-SQLInstanceDomain | Get-SQLConnectionTestThreaded - Verbose
 
 # Get MSSQL information
 Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose
+```
+
+### Forest Security Principals Enumeration
+```powershell
+# Get groups with members from other domains
+Find-ForeignGroup -Verbose
+
+# Get users from other domains with access to the current domain
+Find-ForeignUser -Verbose
 ```
