@@ -336,4 +336,15 @@ Find-InterestingDomainShareFile
 Get-Childitem -Path C:\ -Force -Include "secr*" -Recurse -ErrorAction SilentlyContinue
 ```
 
+### MSSQL Enumeration
+```powershell
+# Get MSSQL instances
+Get-SQLInstanceDomain
 
+# Get MSSQL accessibility
+Get-SQLConnectionTestThreaded
+Get-SQLInstanceDomain | Get-SQLConnectionTestThreaded - Verbose
+
+# Get MSSQL information
+Get-SQLInstanceDomain | Get-SQLServerInfo -Verbose
+```
