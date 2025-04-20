@@ -28,7 +28,7 @@ where:
 - `/user` - Specifies the username to impersonate (e.g., `Administrator`).  
 - `/ldap` - Targets the LDAP service on Domain Controllers.  
 - `/service` - Specifies the service principal name (format: `krbtgt/DOMAIN.LOCAL`).
-- `/rc4` - Provides the NTLM hash of the KRBTGT account for ticket signing . 
+- `/rc4` - Provides the NTLM hash of the trust key account for ticket signing . 
 - `/sids` - Adds Enterprise Admins SIDs to the ticket (e.g., Enterprise Admins `S-1-5-21-...-519`) .
 
 **Request a TGS:**

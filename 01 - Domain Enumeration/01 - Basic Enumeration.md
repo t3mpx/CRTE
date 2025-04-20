@@ -286,7 +286,7 @@ Get-PathAcl -Path "\\us-dc\sysvol"
 # Get Interesting Domain ACLs of User
 Find-InterestingDomainAcl -ResolveGUIDs | ?{$_.IdentityReferenceName -match "<User>"}
 
-# Get ACLs of speficin domain:
+# Get ACLs of speficin domain
 Find-InterestingDomainAcl -Domain <Domain>
 ```
 
