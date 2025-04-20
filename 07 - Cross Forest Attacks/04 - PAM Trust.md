@@ -12,8 +12,15 @@
 
 ## AD Module
 https://github.com/samratashok/ADModule
-```powershell
 
+**Enumerate if PAM trust is enabled:**
+```powershell
+Get-ADTrust -Filter {(ForestTransitive - eq $True) -and (SIDFilteringQuarantined -eq $False)}
+```
+
+**Check what users are member os shadow principals:**
+```powershell
+Get-ADObject -SearchBase ("CN=Shadow Principal Configuration,CN=Services," + (GetADRootDSE).configurationNamingContext) -Filter * -Properties * | select Name,member,msDS-ShadowPrincipalSid | fl
 ```
 
 ---
