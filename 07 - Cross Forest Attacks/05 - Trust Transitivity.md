@@ -8,7 +8,7 @@
 # Binaries
 >**ℹ️ Info:**
 >
-> Remember to follow the [binaries methodology](Notes/Certifications/CRTE/00%20-%20Miscellaneous/01-%20Methodology.md#Binaries).
+> Remember to follow the [PowerShell scripts methodology](../00%20-%20Miscellaneous/01-%20Methodology.md#PowerShell%20Scripts).
 
 ## Rubeus
 **Request a TGT for the eu\\administrator user:**

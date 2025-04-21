@@ -12,7 +12,7 @@
 # Powershell
 >**ℹ️ Info:**
 >
-> Remember to follow the [PowerShell scripts methodology](Notes/Certifications/CRTE/00%20-%20Miscellaneous/01-%20Methodology.md#PowerShell%20Scripts).
+> Remember to follow the [PowerShell scripts methodology](../00%20-%20Miscellaneous/01-%20Methodology.md#PowerShell%20Scripts).
 
 ## PowerView
 **Find users that have an SPN set:**
